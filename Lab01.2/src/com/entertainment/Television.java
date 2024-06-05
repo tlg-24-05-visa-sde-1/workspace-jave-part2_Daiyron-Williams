@@ -2,7 +2,7 @@ package com.entertainment;
 
 import java.util.Objects;
 
-public class Television {
+public class Television implements Comparable<Television> {
     //  fields or instance variables
     private String brand;
     private int volume;
@@ -50,15 +50,20 @@ public class Television {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        boolean result = false;
+
+        //  'this'(me) and 'obj' refer to the same physical object in memory
+        if(this == obj) {
+            result = true; //   and we're done, return result(true)
         }
-        if (obj == null || this.getClass() != obj.getClass()) {
-            return false;
+        //  'obj' is not-null and my Class object is the same as its Class object, proceed
+        //  otherwise, skip this while thing and return result (false)
+        else if(obj != null && (this.getClass() == obj.getClass())) {
+            Television other = (Television) obj;
+            result = Objects.equals(this.getBrand(), other.getBrand()) &&   //  null-safe
+                    this.getVolume() == other.getVolume();  //  primitives can't be null
         }
-        Television other = (Television) obj;
-        return this.getVolume() == other.getVolume() &&
-                Objects.equals(this.getBrand(), other.getBrand());
+        return result;
     }
 
     @Override
@@ -66,6 +71,10 @@ public class Television {
         return Objects.hash(getBrand(), getVolume());
     }
 
+    @Override
+    public int compareTo(Television other) {
+        return this.getBrand().compareTo(other.getBrand());
+    }
 
     @Override
     public String toString() {
