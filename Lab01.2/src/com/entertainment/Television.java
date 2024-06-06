@@ -2,6 +2,12 @@ package com.entertainment;
 
 import java.util.Objects;
 
+/*
+ *  NOTE: to be "consistent with equals" you must use the same sort key(s)
+ *  as you're using in your equals() method - for us, that's (brand, volume)
+ *  Natural order is thus defined by brand(String), then by volume (int)
+ *  when tied on brand
+ */
 public class Television implements Comparable<Television> {
     //  fields or instance variables
     private String brand;
@@ -73,7 +79,12 @@ public class Television implements Comparable<Television> {
 
     @Override
     public int compareTo(Television other) {
-        return this.getBrand().compareTo(other.getBrand());
+        int result = this.getBrand().compareTo(other.getBrand());
+
+        if (result == 0) {
+            result = Integer.compare(this.getVolume(), other.getVolume());
+        }
+        return result;
     }
 
     @Override

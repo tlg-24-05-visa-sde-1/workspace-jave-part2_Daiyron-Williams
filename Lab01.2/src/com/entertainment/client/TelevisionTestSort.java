@@ -11,6 +11,7 @@ package com.entertainment.client;
 import java.util.Arrays;
 import java.util.List;
 import com.entertainment.Television;
+import com.entertainment.TelevisionBrandChannelComparator;
 import com.entertainment.TelevisionChannelComparator;
 
 public class TelevisionTestSort {
