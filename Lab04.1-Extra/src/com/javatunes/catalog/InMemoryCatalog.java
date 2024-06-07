@@ -175,7 +175,6 @@ public class InMemoryCatalog implements Catalog {
         return count;
     }
 
-
     /**
      * TASK: determine average price of our low-cost, extensive catalog of music.
      */
