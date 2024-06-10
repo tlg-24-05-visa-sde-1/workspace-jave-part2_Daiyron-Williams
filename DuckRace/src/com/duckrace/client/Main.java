@@ -1,6 +1,6 @@
 package com.duckrace.client;
 
-import com.duckrace.DuckRaceApp;
+import com.duckrace.app.DuckRaceApp;
 
 class Main {
 

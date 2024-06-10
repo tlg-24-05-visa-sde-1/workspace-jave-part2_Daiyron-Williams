@@ -1,4 +1,7 @@
-package com.duckrace;
+package com.duckrace.app;
+
+import com.duckrace.Board;
+import com.duckrace.Reward;
 
 import java.util.Scanner;
 import static com.duckrace.Reward.*;
