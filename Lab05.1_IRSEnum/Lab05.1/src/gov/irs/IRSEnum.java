@@ -11,7 +11,7 @@ package gov.irs;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public enum IRSEnum {
+enum IRSEnum implements IRS {
     INSTANCE;
 
     // BUSINESS CODE

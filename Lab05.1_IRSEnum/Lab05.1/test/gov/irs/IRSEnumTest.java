@@ -25,9 +25,13 @@ public class IRSEnumTest {
      * TASK: verify that two calls to IRSEnum.getInstance() return the same instance.
      */
     @Test
-    public void getInstance_shouldReturnSameInstance_everyTime() {
-
+    public void getInstance_shouldReturnSameInstance_everyTime(){
+        IRSEnum irs1 = IRSEnum.getInstance();
+        IRSEnum irs2 = IRSEnum.getInstance();
+        assertTrue(irs1 == irs2);
+        assertSame(irs1, irs2);
     }
+
 
     /*
      * Calling a static method loads the .class file.
@@ -37,5 +41,6 @@ public class IRSEnumTest {
     @Test
     public void classload_triggersInstanceCreation() {
         // TODO: call IRSEnum.touch() and note the output
+        IRSEnum.touch();
     }
 }
