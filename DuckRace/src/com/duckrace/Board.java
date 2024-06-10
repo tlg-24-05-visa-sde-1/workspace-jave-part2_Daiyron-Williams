@@ -65,18 +65,23 @@ class Board {
      *
      *  TODO: make it pretty, as close to the "real" board we show in class as possible
      */
-    void show(){
-        Collection<DuckRacer> racers = racerMap.values();
+    void show() {
+        if (racerMap.isEmpty()) {
+            System.out.println("\n");
+            System.out.println("There are currently no results to display");
+            System.out.println("\n");
+        } else {
+            Collection<DuckRacer> racers = racerMap.values();
 
-        System.out.println("id name   wins   rewards");
-        System.out.println("-- ----   ----   -------");
+            System.out.println("id name   wins   rewards");
+            System.out.println("-- ----   ----   -------");
 
-        for (DuckRacer racer : racers) {
-            System.out.printf("%s  %s  %s  %s\n",
-                    racer.getId(), racer.getName(), racer.getWins(), racer.getRewards());
+            for (DuckRacer racer : racers) {
+                System.out.printf("%s  %s  %s  %s\n",
+                        racer.getId(), racer.getName(), racer.getWins(), racer.getRewards());
+            }
         }
     }
-
     //  TESTING PURPOSES ONLY
     void dumpStudentIdMap(){
         System.out.println(studentIdMap);
