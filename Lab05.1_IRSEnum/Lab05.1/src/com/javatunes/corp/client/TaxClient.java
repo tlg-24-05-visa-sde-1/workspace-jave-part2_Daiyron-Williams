@@ -18,7 +18,7 @@ class TaxClient {
         // get the IRS instance
         IRS irs = IRS.getInstance();
 
-        // TODO: uncomment this block after completing the above TODO
+        // uncomment this block after completing the above
         // create the Corporation and register it with the IRS
         Corporation corp = new Corporation("JavaTunes");
         irs.register(corp);
