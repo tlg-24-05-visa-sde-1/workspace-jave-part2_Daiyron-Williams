@@ -11,8 +11,9 @@ public class EmployeeTest {
 
     @Before
     public void setUp() {
-        emp1 = new SalariedEmployee("John", Date.valueOf("2020-01-01"));
-        emp2 = new SalariedEmployee("John", Date.valueOf("2020-01-01"));
+        // create two instances of your named inner class
+        // emp1 = new SalariedEmployee("John", Date.valueOf("2020-01-01"));
+        // emp2 = new SalariedEmployee("John", Date.valueOf("2020-01-01"));
     }
 
     @Test
@@ -36,4 +37,24 @@ public class EmployeeTest {
         assertEquals(emp1, emp2);          //  this does an .equals() check
         assertTrue(emp1.equals(emp2));     //   alternative assertion
     }
+
+    // NAMED MEMBER_LEVEL INNER CLASSES
+    private class DummyEmployee extends Employee {
+
+        public DummyEmployee() {
+        }
+
+        public DummyEmployee(String name, Date hireDate) {
+            super(name, hireDate);
+        }
+
+        @Override
+        public double pay() {
+            return 0;
+        }
+
+        @Override
+        public double payTaxes() {
+            return 0;
+        }
 }
