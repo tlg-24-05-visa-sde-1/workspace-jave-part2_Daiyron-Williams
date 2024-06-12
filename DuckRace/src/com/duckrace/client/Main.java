@@ -9,5 +9,4 @@ class Main {
         DuckRaceApp app = new DuckRaceApp();
         app.execute();
     }
-
 }
