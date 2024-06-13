@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-class RadishSortTest {
+class RadishSortTestLambda {
 
     public static void main(String[] args) {
         List<Radish> radishes = new ArrayList<>();
@@ -23,17 +23,33 @@ class RadishSortTest {
         radishes.sort(null);    //  passing null means natural order
         dump(radishes);
 
-        System.out.println("sort by color via Lambda as the Comparator");
+        System.out.println("sort by color via RadishColorComparator");
         radishes.sort(new RadishColorComparator());
-        radishes.sort( (r1, r2) -> r1.getColor().compareTo(r2.getColor()) );
+        radishes.sort( new Comparator<Radish>() {
+            @Override
+            public int compare(Radish r1, Radish r2) {
+                return r1.getColor().compareTo(r2.getColor());
+            }
+        } );
         dump(radishes);
 
-        System.out.println("sort by guysOnTop vis Lambda as the Comparator");
-        radishes.sort( (r1, r2) -> Integer.compare(r1.getGuysOnTop(), r2.getGuysOnTop()) );
+        System.out.println("sort by guysOnTop vis RadishGuysOnTopComparator");
+        radishes.sort(new RadishGuysOnTopComparator());
+        radishes.sort( new Comparator<Radish>() {
+            @Override
+            public int compare(Radish r1, Radish r2) {
+                return Integer.compare(r1.getGuysOnTop(), r2.getGuysOnTop());
+            }
+        } );
         dump(radishes);
 
         System.out.println("sort by tailLength via anonymous class");
-        radishes.sort( (r1, r2) -> Double.compare(r1.getTailLength(), r2.getTailLength()) );
+        radishes.sort( new Comparator<Radish>() {
+            @Override
+            public int compare(Radish r1, Radish r2) {
+                return Double.compare(r1.getTailLength(), r2.getTailLength());
+            }
+        } );
         dump(radishes);
     }
 
