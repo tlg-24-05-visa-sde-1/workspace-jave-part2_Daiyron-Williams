@@ -8,6 +8,9 @@
  */
 package com.javatunes.personnel;
 
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -39,7 +42,7 @@ public class EmployeeStreamsTest {
         List<Employee> employees = allEmployees.stream()
                 .filter(emp -> emp.getSalary() < 40000.0)
                 .sorted()  // natural order
-                .collect(Collectors.toList());
+                .collect(toList());
 
         assertEquals(2, employees.size());
         assertEquals(Long.valueOf(2),  employees.get(0).getId());
@@ -52,7 +55,12 @@ public class EmployeeStreamsTest {
      */
     @Test
     public void findAll_nameLengthAtMost5_sortBySalary() {
-
+        List<Employee> result = allEmployees.stream()
+                .filter(emp -> emp.getName().length() <= 5)
+                // .sorted((emp1, emp2) -> emp1.getSalary().compareTo(emp2.getSalary()))
+                .sorted(comparing(Employee::getSalary))
+                .collect(toList());
+        dump(result);
     }
 
     /**
@@ -61,7 +69,11 @@ public class EmployeeStreamsTest {
      */
     @Test
     public void findAll_salaryAtLeast50000_sortByHireDate() {
-
+        List<Employee> result = allEmployees.stream()
+                .filter(emp -> emp.getSalary() >= 50_000.0)
+                // .sorted((emp1, emp2) -> emp1.getHireDate().compareTo(emp2.getHireDate()))
+                .sorted(comparing(emp -> emp.getHireDate()))
+                .collect(toList());
     }
 
     /**
@@ -69,7 +81,11 @@ public class EmployeeStreamsTest {
      */
     @Test
     public void count_salaryAtLeast75000() {
+        long count = allEmployees.stream()
+                .filter(emp -> emp.getSalary() >= 75_000.0)
+                .count();
 
+        System.out.println("The count is " + count);
     }
 
     /**
@@ -77,7 +93,14 @@ public class EmployeeStreamsTest {
      */
     @Test
     public void threeHighestPaid_sortByName() {
+        List<Employee> highestPaid = allEmployees.stream()
+                // .sorted( (emp1, emp2) -> emp2.getSalary().compareTo(emp1.getSalary()) )
+                .sorted(comparing(Employee::getSalary).reversed())
+                .limit(3)
+                .sorted( (emp1, emp2) -> emp1.getName().compareTo(emp2.getName()) )
+                .collect(toList());
 
+        dump(highestPaid);
     }
 
     /**
@@ -86,7 +109,14 @@ public class EmployeeStreamsTest {
      */
     @Test
     public void findAllNames_hired2010Later() {
+        List<String> names = allEmployees.stream()
+                .filter(emp -> emp.getHireDate().getYear() >= 2010)
+                .map(emp -> emp.getName())    // emp - emp.getName()
+                                              // NOTE: this is a Stream<String> now
+                .sorted()
+                .collect(toList());
 
+        dump(names);
     }
 
     /**
